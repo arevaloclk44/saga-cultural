@@ -1,0 +1,316 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SAGA Espacio Cultural</title>
+<meta name="description" content="SAGA Espacio Cultural — exposiciones, talleres y conversatorios en el piso 3 del C.C. Paseo El Hatillo.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap">
+<style>
+  :root{
+    --ink:#1a1a1a;
+    --ink-2:#242424;
+    --ink-3:#2e2e2e;
+    --paper:#f4f3ef;
+    --text:#f2f1ec;
+    --text-dim:#9a988f;
+    --gray:#767676;
+    --gray-light:#c9c7c0;
+    --line:rgba(242,241,236,0.14);
+    --display:'Poppins',ui-sans-serif,system-ui,sans-serif;
+    --sans:'Manrope',ui-sans-serif,system-ui,sans-serif;
+    --mono:'JetBrains Mono',ui-monospace,'SFMono-Regular',monospace;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;background:var(--ink);color:var(--text);
+    font-family:var(--sans);font-size:16px;line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+  }
+  img{max-width:100%;}
+  h1,h2,h3{font-family:var(--display);text-wrap:balance;margin:0;}
+  p{margin:0;}
+  a{color:inherit;text-decoration:none;}
+  :focus-visible{outline:2px solid var(--text);outline-offset:3px;}
+
+  .wrap{max-width:1140px;margin:0 auto;padding:0 28px;}
+  .eyebrow{
+    font-family:var(--mono);font-size:12px;letter-spacing:0.16em;
+    text-transform:uppercase;color:var(--gray-light);
+  }
+
+  /* ---------- LOGO MARK ---------- */
+  .mark{display:inline-flex;flex-direction:column;align-items:flex-start;}
+  .mark img{display:block;}
+
+  .mark-sm img{height:26px;width:auto;}
+
+  .mark-lg img{height:clamp(58px,9vw,108px);width:auto;}
+  .mark-lg .caption{margin-top:14px;font-family:var(--sans);font-weight:700;letter-spacing:0.3em;
+    font-size:clamp(12px,1.6vw,18px);color:var(--text);text-transform:uppercase;}
+
+  /* ---------- NAV ---------- */
+  nav.bar{position:sticky;top:0;z-index:50;background:rgba(26,26,26,0.9);
+    backdrop-filter:blur(10px);border-bottom:1px solid var(--line);}
+  nav.bar .wrap{display:flex;align-items:center;justify-content:space-between;height:72px;gap:20px;}
+  .navlinks{display:flex;gap:28px;flex-wrap:wrap;}
+  .navlinks a{font-family:var(--mono);font-size:12px;letter-spacing:0.07em;text-transform:uppercase;
+    color:var(--text-dim);padding:6px 0;border-bottom:1px solid transparent;
+    transition:color .2s,border-color .2s;}
+  .navlinks a:hover{color:var(--text);border-color:var(--text);}
+
+  /* ---------- HERO ---------- */
+  .hero{position:relative;min-height:min(78vh,760px);display:flex;align-items:flex-end;overflow:hidden;}
+  .hero .bgphoto{position:absolute;inset:0;background-image:url('images/storefront.jpg');
+    background-size:cover;background-position:center 60%;}
+  .hero::after{content:"";position:absolute;inset:0;
+    background:
+      linear-gradient(180deg, rgba(14,14,14,0.55) 0%, rgba(14,14,14,0.35) 32%, rgba(16,16,16,0.82) 78%, var(--ink) 100%);
+    pointer-events:none;}
+  .hero .inner{position:relative;z-index:1;display:flex;flex-direction:column;align-items:flex-start;
+    gap:30px;padding:64px 0 56px;width:100%;}
+  .hero .mark-lg{animation:rise .9s cubic-bezier(.2,.8,.2,1) both;}
+  .hero .lede{max-width:46ch;font-size:18.5px;color:var(--text-dim);
+    animation:rise .9s .1s cubic-bezier(.2,.8,.2,1) both;}
+  .hero .ctas{display:flex;gap:16px;flex-wrap:wrap;animation:rise .9s .2s cubic-bezier(.2,.8,.2,1) both;}
+  @keyframes rise{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:translateY(0);}}
+  @media (prefers-reduced-motion:reduce){.hero .mark-lg,.hero .lede,.hero .ctas{animation:none;}}
+
+  .btn{font-family:var(--mono);font-size:13px;letter-spacing:0.06em;text-transform:uppercase;
+    padding:14px 26px;display:inline-flex;align-items:center;gap:10px;
+    transition:transform .15s, background .2s, color .2s, border-color .2s;}
+  .btn-solid{background:var(--text);color:var(--ink);}
+  .btn-solid:hover{background:#fff;transform:translateY(-1px);}
+  .btn-line{border:1px solid var(--line);color:var(--text);}
+  .btn-line:hover{border-color:var(--text);transform:translateY(-1px);}
+
+  /* ---------- SECTION SCAFFOLD ---------- */
+  section{padding:100px 0;border-bottom:1px solid var(--line);}
+  section:last-of-type{border-bottom:none;}
+  .head{max-width:56ch;margin-bottom:56px;}
+  .head h2{font-size:clamp(32px,4.2vw,46px);font-weight:700;margin-top:14px;}
+
+  /* ---------- MISIÓN ---------- */
+  .mission{display:grid;grid-template-columns:1.1fr 0.9fr;gap:64px;align-items:start;}
+  .mission p{color:var(--text-dim);font-size:16.5px;margin-bottom:18px;}
+  .mission p:last-child{margin-bottom:0;}
+  .mission p strong{color:var(--text);font-weight:700;}
+  .pillars{display:flex;flex-direction:column;border:1px solid var(--line);}
+  .pillar{padding:22px 24px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:baseline;gap:12px;}
+  .pillar:last-child{border-bottom:none;}
+  .pillar .num{font-family:var(--mono);font-size:12px;color:var(--gray-light);}
+  .pillar .label{font-family:var(--display);font-weight:600;font-size:19px;color:var(--text);}
+
+  /* ---------- EXPOSICIONES ---------- */
+  .gallery{display:grid;grid-template-columns:1.2fr 1fr;gap:22px;align-items:start;}
+  .frame{display:flex;flex-direction:column;gap:14px;}
+  .frame:first-child{grid-row:span 2;}
+  .canvas{position:relative;overflow:hidden;border:1px solid var(--line);background:var(--ink-2);}
+  .canvas img{display:block;width:100%;height:100%;object-fit:cover;}
+  .frame:first-child .canvas{aspect-ratio:4/5;}
+  .frame:last-child .canvas{aspect-ratio:4/3;}
+  .canvas .plate{position:absolute;left:14px;bottom:14px;background:rgba(26,26,26,0.82);
+    font-family:var(--mono);font-size:10.5px;letter-spacing:.05em;color:var(--text-dim);
+    padding:4px 8px;text-transform:uppercase;border:1px solid var(--line);}
+  .frame figcaption{font-family:var(--mono);font-size:12px;color:var(--text-dim);letter-spacing:.03em;}
+  .frame figcaption b{color:var(--text);font-family:var(--sans);font-weight:700;display:block;font-size:14px;margin-bottom:3px;letter-spacing:0;}
+
+  .gallery-note{margin-top:34px;font-family:var(--mono);font-size:12.5px;color:var(--text-dim);letter-spacing:.03em;}
+  .gallery-note b{color:var(--gray-light);}
+
+  /* ---------- TALLERES ---------- */
+  .program{border-top:1px solid var(--line);}
+  .pitem{display:grid;grid-template-columns:150px 1fr auto;gap:28px;align-items:baseline;
+    padding:26px 0;border-bottom:1px solid var(--line);}
+  .pitem .tag{font-family:var(--mono);font-size:11px;letter-spacing:.08em;
+    padding:5px 10px;width:fit-content;text-transform:uppercase;}
+  .pitem.taller .tag{background:var(--text);color:var(--ink);}
+  .pitem.conv .tag{background:transparent;color:var(--text-dim);border:1px solid var(--line);}
+  .pitem h3{font-size:21px;font-weight:700;color:var(--text);margin-bottom:6px;}
+  .pitem p{color:var(--text-dim);font-size:15px;max-width:56ch;}
+  .pitem .meta{font-family:var(--mono);font-size:12px;color:var(--text-dim);text-align:right;white-space:nowrap;}
+
+  /* ---------- CONTACTO ---------- */
+  .contact{display:grid;grid-template-columns:1fr 1fr;gap:64px;}
+  .plaque{border:1px solid var(--line);padding:32px;}
+  .plaque dl{display:grid;grid-template-columns:auto 1fr;gap:10px 18px;margin:0;}
+  .plaque dt{font-family:var(--mono);font-size:11.5px;letter-spacing:.07em;color:var(--gray-light);text-transform:uppercase;align-self:start;padding-top:2px;}
+  .plaque dd{margin:0;font-size:15.5px;color:var(--text);}
+  .plaque dd.dim{color:var(--text-dim);font-size:13px;font-family:var(--mono);}
+  .pin{width:28px;height:28px;margin-bottom:18px;}
+
+  .contact-ctas{display:flex;flex-direction:column;justify-content:center;gap:16px;}
+  .contact-ctas p{color:var(--text-dim);font-size:15.5px;max-width:42ch;}
+  .social{display:flex;gap:14px;flex-wrap:wrap;margin-top:4px;}
+
+  footer{padding:36px 0;}
+  footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;}
+  footer p{font-family:var(--mono);font-size:11.5px;color:var(--text-dim);letter-spacing:.04em;}
+
+  @media (max-width:860px){
+    .mission,.contact{grid-template-columns:1fr;gap:40px;}
+    .gallery{grid-template-columns:1fr;}
+    .frame:first-child{grid-row:auto;}
+    .pitem{grid-template-columns:1fr;gap:8px;}
+    .pitem .meta{text-align:left;}
+  }
+  @media (max-width:520px){
+    nav.bar .wrap{height:auto;padding-top:14px;padding-bottom:14px;}
+    section{padding:64px 0;}
+    .hero{min-height:min(88vh,620px);}
+    .hero .inner{padding:40px 0 36px;}
+  }
+</style>
+</head>
+<body>
+
+<nav class="bar">
+  <div class="wrap">
+    <a class="mark mark-sm" href="#top">
+      <img src="images/saga-mark.png" alt="SAGA" />
+    </a>
+    <div class="navlinks">
+      <a href="#mision">Misión</a>
+      <a href="#exposiciones">Exposiciones</a>
+      <a href="#talleres">Talleres</a>
+      <a href="#contacto">Contacto</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="bgphoto" role="img" aria-label="Fachada de SAGA Espacio Cultural en el C.C. Paseo El Hatillo"></div>
+  <div class="wrap inner">
+    <div class="mark mark-lg">
+      <img src="images/saga-mark.png" alt="SAGA" />
+      <span class="caption">Espacio Cultural</span>
+    </div>
+    <p class="lede">Un lugar donde las expresiones tradicionales conversan con el arte digital, la tecnología y la inteligencia artificial — abierto, innovador e inclusivo. Piso 3, C.C. Paseo El Hatillo.</p>
+    <div class="ctas">
+      <a class="btn btn-solid" href="#talleres">Ver programación</a>
+      <a class="btn btn-line" href="#contacto">Cómo llegar</a>
+    </div>
+  </div>
+</header>
+
+<section id="mision">
+  <div class="wrap">
+    <div class="head">
+      <span class="eyebrow">Misión</span>
+      <h2>Arte, comunidad y futuro</h2>
+    </div>
+    <div class="mission">
+      <div>
+        <p>SAGA nace con el interés de contribuir al desarrollo del acontecer cultural y artístico de nuestro municipio, ofreciendo un espacio que invita a la <strong>reflexión, el diálogo y la conexión</strong> entre el público y las distintas manifestaciones artísticas.</p>
+        <p>Nuestra misión es consolidar un lugar abierto e inclusivo, donde converjan tanto artistas consolidados como nuevas generaciones, generando experiencias que fortalezcan los lazos entre la cultura y la vida cotidiana.</p>
+        <p>Gracias a la alianza con el <strong>Centro Comercial Paseo El Hatillo</strong>, este proyecto se integra de forma orgánica al tejido urbano, acercando el arte a la comunidad y promoviendo su valoración como parte esencial de la vida social.</p>
+      </div>
+      <div class="pillars">
+        <div class="pillar"><span class="label">Comunidad</span><span class="num">01</span></div>
+        <div class="pillar"><span class="label">Creación</span><span class="num">02</span></div>
+        <div class="pillar"><span class="label">Tecnología &amp; IA</span><span class="num">03</span></div>
+        <div class="pillar"><span class="label">Futuro</span><span class="num">04</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="exposiciones">
+  <div class="wrap">
+    <div class="head">
+      <span class="eyebrow">Exposiciones</span>
+      <h2>Arte contemporáneo en diálogo</h2>
+    </div>
+    <div class="gallery">
+      <figure class="frame">
+        <div class="canvas">
+          <img src="images/interior1.jpg" alt="Sala principal de SAGA con pinturas y esculturas geométricas sobre pedestales blancos" loading="lazy" />
+          <span class="plate">Sala principal</span>
+        </div>
+        <figcaption><b>Abstracción geométrica &amp; escultura</b>Piso de concreto, columnas vistas e iluminación museográfica</figcaption>
+      </figure>
+      <figure class="frame">
+        <div class="canvas">
+          <img src="images/interior2.jpg" alt="Sala de exhibición de SAGA con obras geométricas en las paredes y esculturas sobre pedestales" loading="lazy" />
+          <span class="plate">Sala — vista 2</span>
+        </div>
+        <figcaption><b>Obras en diálogo con el espacio</b>Montaje actual de la exposición vigente</figcaption>
+      </figure>
+    </div>
+    <p class="gallery-note"><b>Nota —</b> fotografías del montaje actual. Se actualizarán con los nombres de obras y artistas cuando nos los compartas.</p>
+  </div>
+</section>
+
+<section id="talleres">
+  <div class="wrap">
+    <div class="head">
+      <span class="eyebrow">Formación</span>
+      <h2>Talleres y conversatorios</h2>
+    </div>
+    <div class="program">
+      <div class="pitem taller">
+        <span class="tag">Taller</span>
+        <div><h3>Arte digital &amp; inteligencia artificial</h3><p>Introducción a herramientas de creación asistida por IA para artistas de cualquier disciplina.</p></div>
+        <span class="meta">Próximamente</span>
+      </div>
+      <div class="pitem taller">
+        <span class="tag">Taller</span>
+        <div><h3>Técnicas tradicionales</h3><p>Prácticas de pintura, grabado y escultura con artistas invitados.</p></div>
+        <span class="meta">Próximamente</span>
+      </div>
+      <div class="pitem conv">
+        <span class="tag">Conversatorio</span>
+        <div><h3>Arte y tecnología: nuevas narrativas</h3><p>Diálogo abierto sobre el cruce entre creación artística, tecnología e IA.</p></div>
+        <span class="meta">Próximamente</span>
+      </div>
+      <div class="pitem conv">
+        <span class="tag">Conversatorio</span>
+        <div><h3>Encuentros con artistas</h3><p>Conversaciones informales con la comunidad de creadores de SAGA.</p></div>
+        <span class="meta">Próximamente</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contacto">
+  <div class="wrap">
+    <div class="head">
+      <span class="eyebrow">Visítanos</span>
+      <h2>Encuéntranos en El Hatillo</h2>
+    </div>
+    <div class="contact">
+      <div class="plaque">
+        <svg class="pin" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M12 22s7-7.1 7-12.5A7 7 0 0 0 5 9.5C5 14.9 12 22 12 22z" stroke="#f2f1ec" stroke-width="1.6"/>
+          <circle cx="12" cy="9.5" r="2.4" fill="#767676"/>
+        </svg>
+        <dl>
+          <dt>Dirección</dt><dd>Piso 3, Centro Comercial Paseo El Hatillo</dd>
+          <dt>Horario</dt><dd>Mar – Dom · 10:00–19:00 <span class="dim">(referencial, por confirmar)</span></dd>
+          <dt>Alianza</dt><dd>C.C. Paseo El Hatillo</dd>
+        </dl>
+      </div>
+      <div class="contact-ctas">
+        <p>Escríbenos para conocer la programación vigente, agendar una visita o proponer una colaboración.</p>
+        <div class="social">
+          <a class="btn btn-solid" href="#">Instagram</a>
+          <a class="btn btn-line" href="#">Escribir por WhatsApp</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p>SAGA Espacio Cultural · En alianza con C.C. Paseo El Hatillo</p>
+    <p>Piso 3 · El Hatillo</p>
+  </div>
+</footer>
+
+</body>
+</html>
